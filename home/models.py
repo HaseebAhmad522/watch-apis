@@ -20,7 +20,7 @@ class Watch(models.Model):
     movement = models.CharField(max_length=300)
     # movement_caliber = models.CharField(max_length=255)
     # frequency = models.CharField(max_length=100)
-    year_of_production = models.IntegerField(default=None, null=True)
+    year_of_production = models.CharField(max_length=300)
     # scope_of_delivery = models.CharField(max_length=200)
     # location = models.CharField(max_length=200)
     # lug_width = models.CharField(max_length=200)

@@ -72,15 +72,15 @@ class CSVUploadView(APIView):
                 mapped_row = {field_mapping.get(key, key): value for key, value in row.items()}
 
                 # Handle the 'year_of_production' field
-                year_of_production = row.get('Year of production')
-                if year_of_production:
-                    try:
-                        year_of_production = int(year_of_production)
-                    except ValueError:
-                        year_of_production = None  # Set to None if not a valid integer
-                else:
-                    year_of_production = None
-                mapped_row['year_of_production'] = year_of_production
+                # year_of_production = row.get('Year of production')
+                # if year_of_production:
+                #     try:
+                #         year_of_production = int(year_of_production)
+                #     except ValueError:
+                #         year_of_production = None  # Set to None if not a valid integer
+                # else:
+                #     year_of_production = None
+                # mapped_row['year_of_production'] = year_of_production
 
                 # Set default values for missing fields
                 for field in Watch._meta.get_fields():
