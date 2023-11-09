@@ -182,7 +182,7 @@ class WatchListAPIView(APIView, PageNumberPagination):
         return Response(serialized_data)
     
 
-class RecommendationAPI(APIView):
+class RecommendationAPI(APIView, PageNumberPagination):
 
     def post(self, request):
         # Get the user query from the request data
@@ -192,9 +192,14 @@ class RecommendationAPI(APIView):
         if not user_query:
             return Response({'error': 'Title is required'}, status=status.HTTP_400_BAD_REQUEST)
         
-
         # Call the recommendation function
         result = self.get_top_recommendations(user_query)
+
+        # Paginate the result
+        page = self.paginate_queryset(result, request)
+        if page is not None:
+            serializer = WatchSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
 
         # Serialize the result and return it in the response
         serializer = WatchSerializer(result, many=True)
